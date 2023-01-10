@@ -5,6 +5,7 @@ require 'uri'
 require 'net/http'
 require 'openssl'
 require 'json'
+require 'ostruct'
 
 require_relative "../structs/block_chain_node"
 
@@ -29,8 +30,7 @@ class Alchemy
         result = parsed_response["result"]
         result["transaction_hash"] = result["hash"]
         result.delete("hash")
-        # node_resul = NodeResult.new(result) (This is not working)
-        node_result = NodeResult.new({ transaction_hash: result["transaction_hash"], from: result["from"], to: result["to"] })
+        node_result = NodeResult.from_hash(result)
         puts "transaction hash: #{p(node_result.transaction_hash)}"
         puts "fromAddress: #{p(node_result.from)}"
         puts "toAddress: #{p(node_result.to)}"
