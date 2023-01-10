@@ -30,7 +30,7 @@ class Alchemy
         result = parsed_response["result"]
         result["transaction_hash"] = result["hash"]
         result.delete("hash")
-        node_result = NodeResult.from_hash(result)
+        node_result = Block_Chain_Node.from_hash(result)
         puts "transaction hash: #{p(node_result.transaction_hash)}"
         puts "fromAddress: #{p(node_result.from)}"
         puts "toAddress: #{p(node_result.to)}"
