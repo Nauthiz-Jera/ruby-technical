@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - feature/update-based-on-comments-round-2
   pull_request:
     branches:
       - master
@@ -14,7 +15,7 @@ jobs:
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
-        ruby: '3.1.2'
+        ruby-version: '3.1.2'
 
     steps:
       - uses: actions/checkout@v3
