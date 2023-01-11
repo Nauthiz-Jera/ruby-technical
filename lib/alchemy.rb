@@ -23,13 +23,18 @@ class Alchemy
         @request["content-type"] = 'application/json'
     end
 
-    sig { params(transaction_hash: String).returns(Transaction) }
-    def fetch_transaction(transaction_hash)
+    def get_response_body(transaction_hash, method)
         request = T.let(Marshal.load(Marshal.dump(@request)), Net::HTTP::Post)
-        request.body = { jsonrpc: "2.0", params: [transaction_hash], method: "eth_getTransactionByHash" }.to_json
+        request.body = { jsonrpc: "2.0", params: [transaction_hash], method: method }.to_json
         response = @http.request(request)
         parsed_response = JSON.parse(response.read_body)
-        result = parsed_response["result"]
+        return parsed_response
+    end
+
+    sig { params(transaction_hash: String).returns(Transaction) }
+    def fetch_transaction(transaction_hash)
+        response = get_response_body(transaction_hash, "eth_getTransactionByHash" )
+        result = response["result"]
         result["transaction_hash"] = result["hash"]
         result.delete("hash")
         return Transaction.from_hash(result)
