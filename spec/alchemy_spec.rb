@@ -8,8 +8,8 @@ require_relative "../structs/transaction"
 
 
 RSpec.describe Alchemy do
-    let (:transaction) do
-         Transaction.new({ 
+    let (:hash_transaction) do
+        { 
             blockHash: "0x1d59ff54b1eb26b013ce3cb5fc9dab3705b415a67127a003c3e61eb445bb8df2",
             blockNumber: "0x5daf3b",
             from: "0xa7d9ddbe1f17865597fbd27ec712455208b6b76d",
@@ -25,7 +25,10 @@ RSpec.describe Alchemy do
             type: "0x0",
             v: "0x25",
             value: "0xf3dbb76162000"
-        })
+        }
+    end
+    let (:transaction) do
+         Transaction.new(hash_transaction)
     end
 
     let (:httpMockInstance) do
