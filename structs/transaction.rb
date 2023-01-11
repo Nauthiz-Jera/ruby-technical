@@ -1,6 +1,6 @@
 require 'sorbet-runtime'
 
-class Block_Chain_Node < T::Struct
+class Transaction < T::Struct
     const :blockHash, String
     const :blockNumber, String
     const :transaction_hash, String
