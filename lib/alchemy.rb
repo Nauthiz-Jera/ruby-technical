@@ -5,6 +5,7 @@ require 'net/http'
 require 'openssl'
 require 'json'
 require 'sorbet-runtime'
+require 'pry'
 
 require_relative "../structs/transaction"
 require_relative "../enums/http"
@@ -13,7 +14,7 @@ require_relative "../helpers/util"
 
 class Alchemy
     extend T::Sig
-    URL = URI(HttpEnums::AlchemyUrl.serialize);
+    URL = HttpEnums::AlchemyUrl.serialize != "alchemyurl" ? URI(HttpEnums::AlchemyUrl.serialize) : URI(HttpEnums::TestUrl.serialize);
 
     sig { params(http: T.nilable(Net::HTTP)).void }
     def initialize(http = Net::HTTP)

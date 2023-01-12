@@ -67,7 +67,7 @@ RSpec.describe Alchemy do
         http = double("http")
         
         http_mock_instance.request_response = transaction_response
-        expect(http).to receive(:new).with("eth-mainnet.g.alchemy.com", 443).and_return(http_mock_instance)
+        expect(http).to receive(:new).with(/(eth-mainnet.g.alchemy.com)|(astar-mainnet.g.alchemy.com)/, 443).and_return(http_mock_instance)
         
         alchemy_instance = Alchemy.new(http)
         expect(alchemy_instance.fetch_transaction("hash_string")).to have_attributes(:transaction_hash => p(transaction.transaction_hash));
