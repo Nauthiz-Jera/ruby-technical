@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 require 'dotenv/load'
 require 'json'
-require 'pry'
 
 require_relative "../lib/alchemy"
 require_relative "../structs/transaction"

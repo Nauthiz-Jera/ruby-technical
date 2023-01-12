@@ -14,7 +14,7 @@ class Alchemy
     extend T::Sig
     URL = URI(HttpEnums::ALCHEMY_URL.serialize);
 
-    # sig { params(http: T.nilable(Net::HTTP)).void }
+    sig { params(http: T.nilable(Net::HTTP)).void }
     def initialize(http = Net::HTTP)
         @http = http.new(URL.host, URL.port)
         @http.use_ssl = true
