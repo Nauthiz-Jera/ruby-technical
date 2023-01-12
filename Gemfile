@@ -6,6 +6,8 @@ gem "rake", "~> 13.0"
 
 gem "rspec", "~> 3.0"
 
+gem 'rspec-sorbet'
+
 gem "rubocop"
 
 gem "dotenv"
@@ -17,3 +19,5 @@ gem 'sorbet', :group => :development
 gem 'sorbet-runtime'
 
 gem 'tapioca', require: false, :group => :development
+
+gem 'pry'

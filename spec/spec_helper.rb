@@ -1,6 +1,7 @@
 # frozen_string_literal: true
+require "rspec/sorbet"
 
-require "hello"
+RSpec::Sorbet.allow_doubles!
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
