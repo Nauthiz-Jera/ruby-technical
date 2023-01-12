@@ -9,6 +9,7 @@ require 'sorbet-runtime'
 require_relative "../structs/transaction"
 require_relative "../enums/http"
 require_relative "../enums/alchemy"
+require_relative "../helpers/util"
 
 class Alchemy
     extend T::Sig
@@ -36,9 +37,7 @@ class Alchemy
     sig { params(transaction_hash: String).returns(Transaction) }
     def fetch_transaction(transaction_hash)
         response = get_response_body([transaction_hash], AlchemyEnums::GET_TRANSACTION)
-        result = response["result"]
-        result["transaction_hash"] = result["hash"]
-        result.delete("hash")
+        result = Util.rename_property(response["result"], "hash", "transaction_hash")
         return Transaction.from_hash(result)
     end
 end
